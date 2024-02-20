@@ -8,7 +8,7 @@ Ko = 0.2E-3; % g/L
 Yxs = 0.4; %g/g
 kla = 250; %h-1
 sf = 10; %g/L 
-of = 0; %g/L
+of = 0; %g/Ll
 
 % Temperature dependency
 T = 298; % K
