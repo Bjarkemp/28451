@@ -54,7 +54,14 @@ temp=xOpt(2)
 disp('The kLa is: ')
 oxygen=xOpt(3)
 
-xinit=[flow temp oxygen];
+optimized=[flow temp oxygen];
+
+%Simulink inputs 
+F = flow; %L/h
+S_f = 10; %g/L
+T = Temp; %K
+k_la =oxygen; %h^-1 
+
 
 %Defining time simulation 
 t0 = 0; 
