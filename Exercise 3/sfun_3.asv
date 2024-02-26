@@ -18,7 +18,7 @@ sizes = simsizes;
 sizes.NumContStates  = 3;
 sizes.NumDiscStates  = 0;
 sizes.NumOutputs     = 3;
-sizes.NumInputs      = 4;
+sizes.NumInputs      = 3;
 sizes.DirFeedthrough = 0;
 sizes.NumSampleTimes = 1;   % at least one sample time is needed
 sys = simsizes(sizes);
@@ -32,25 +32,21 @@ ts  = [0 0];
 function sys=mdlDerivatives(t,x,u,par)
 % Assign values to the parameters, par is a vector with parameter values
 % that is sent to the S-function
-
-Ks = par(1);
-Ko = par(2);
-Yxs = par(3);
-V = par(4);
-sf = par(5); 
-of = par(6);
-mumax = par(7);
-osat = par(8);
-
-F=u(1);
-sf=u(2);
-T=u(3);
-kla=u(4);
-
+V = par(1);
+F = par(2);
+Ks = par(3);
+Ko = par(4);
+Yxs = par(5);
+kla = par(6);
+sf = par(7); 
+of = par(8);
+mumax = par(9);
+osat = par(10);
 
 % Calculate mu based on Monod kinetics
 mu=mumax*(x(2)/(Ks+x(2))) * (x(3)/(Ko+x(3)));
 
+kla=u(1);
 dxdt(1)= mu * x(1) - (F/V) * x(1); % biomass
 dxdt(2)= (F/V) * (sf-x(2)) - (1/Yxs) * mu * x(1); % substrate 
 dxdt(3)= (F/V) * (of-x(3)) - ((1/Yxs) - 1) * mu * x(1) + kla * (osat - x(3)); % oxygen
