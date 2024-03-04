@@ -63,18 +63,11 @@ T200 = u(15);
 T201 = u(16);
 Q200 = u(17);
 
-
 % Variable identification
 
 L2 = x(1);
 X2 = x(2);
 P2 = x(3);
-
-%Diff system
-
-dxdt(1)= (F1-F4-F2)/rhoA; % mass balance of separator
-dxdt(2)= (F1*X1-F2*X2)/M; % Evaporator composition 
-dxdt(3)= (F4-F5)/C; % Evaporator pressure
 
 %Equations - evaporator
 T2 = 0.5616 * P2 + 0.3126 * X2 + 48.43;
@@ -90,6 +83,11 @@ F100 = Q100 / lambda_s;
 Q200 = UA2 * (T3 - T200) /(1 + UA2 /(2 * Cp * F200));
 T201 = T200 + Q200 /(F200 * Cp);
 F5 = Q200 / lambda;
+
+%Diff system
+dxdt(1)= (F1-F4-F2)/rhoA; % mass balance of separator
+dxdt(2)= (F1*X1-F2*X2)/M; % Evaporator composition 
+dxdt(3)= (F4-F5)/C; % Evaporator pressure
 
 sys = [dxdt(1) dxdt(2) dxdt(3)];
 

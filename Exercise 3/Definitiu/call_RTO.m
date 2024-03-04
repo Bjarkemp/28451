@@ -24,6 +24,7 @@ Opt_temp=xOpt(2)
 
 disp('The kLa is: ')
 Opt_kla=xOpt(3)
+
 OptPar=[Opt_flow Opt_temp Opt_kla];
 
 %Simulink inputs 

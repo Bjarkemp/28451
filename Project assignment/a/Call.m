@@ -63,26 +63,32 @@ x1 = ans.y(:,1);
 x2 = ans.y(:,2);
 x3 = ans.y(:,3);
 
+% Convert time from hours to days
+Time_days = Time / 24; % Assuming 24 hours in a day
+
 % Plot the results
 figure;
 
 % Plot x1
 subplot(3,1,1);
-plot(Time, x1, 'b', 'LineWidth', 1.5);
-xlabel('Time (h)');
-ylabel('x1');
-title('x1 Over Time');
+plot(Time_days, x1, 'b', 'LineWidth', 1.5);
+xlabel('Time (days)');
+ylabel('L2 [m]');
+title('Separator level Over Time');
 
 % Plot x2
 subplot(3,1,2);
-plot(Time, x2, 'r', 'LineWidth', 1.5);
-xlabel('Time (h)');
-ylabel('x2');
-title('x2 Over Time');
+plot(Time_days, x2, 'r', 'LineWidth', 1.5);
+xlabel('Time (days)');
+ylabel('X2 [mol%]');
+title('Product composition Over Time');
 
 % Plot x3
 subplot(3,1,3);
-plot(Time, x3, 'g', 'LineWidth', 1.5);
-xlabel('Time (h)');
-ylabel('x3');
-title('x3 Over Time');
+plot(Time_days, x3, 'g', 'LineWidth', 1.5);
+xlabel('Time (days)');
+ylabel('P2 [kPa]');
+title('Operating pressure Over Time');
+
+% Save figure
+saveas(gcf, 'Evaporator_1.png');
