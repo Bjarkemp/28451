@@ -10,15 +10,15 @@ C = 4; % kg/kPa
 lambda_s = 36.6; % kW (kg/min)
 UA2 = 6.84; % kW/K
 %%States
-%T2 = 84.6; %C %%Product temperature
-%T3 = 80.6; %C %%Circulating temperature
-%F4 = 8.0; %kg=min %%Vapor flowrate
-%F5 = 8.0; %kg=min %%Condensate flowrate
-%T100 = 119.9; %C %%Steam temperature
-%Q100 = 339.0; %kW %%Heater duty
-%F100 = 9.3; %kg/min %%Steam flowrate
-%Q200 = 307.9; %kW %%Condenser duty
-%T201 = 46.1; %C %%Cooling water outlet temp.
+T2 = 84.6; %C %%Product temperature
+T3 = 80.6; %C %%Circulating temperature
+F4 = 8.0; %kg=min %%Vapor flowrate
+F5 = 8.0; %kg=min %%Condensate flowrate
+T100 = 119.9; %C %%Steam temperature
+Q100 = 339.0; %kW %%Heater duty
+F100 = 9.3; %kg/min %%Steam flowrate
+Q200 = 307.9; %kW %%Condenser duty
+T201 = 46.1; %C %%Cooling water outlet temp.
 
 %disturbance variables
 F1 = 10.0; %kg/min %%Feed flowrate
@@ -37,7 +37,7 @@ L2N = 1; %m %%separator level
 X2N = 25; % percent %% product composition
 P2N = 50.5; % kPa % operating pressure
 
-par = [rhoA,M,Cp,lambda,C,lambda_s, UA2];
+par = [rhoA,M,Cp,lambda,C,lambda_s, UA2, T2, T3, F4, F5, T100, Q100, F100, Q200, T201];
 
 inputv =[F2, F3, P100, F200, F1, X1, T1, T200].';%%for all inputs
 

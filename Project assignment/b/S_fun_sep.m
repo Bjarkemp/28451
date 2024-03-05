@@ -20,7 +20,7 @@ sizes = simsizes;
 sizes.NumContStates  = 3;
 sizes.NumDiscStates  = 0;
 sizes.NumOutputs     = 3;
-sizes.NumInputs      = 17;
+sizes.NumInputs      = 8;
 sizes.DirFeedthrough = 0;
 sizes.NumSampleTimes = 1;   % at least one sample time is needed
 sys = simsizes(sizes);
@@ -44,27 +44,19 @@ lambda_s = par(6);
 UA2 = par(7);
 
 %inputs
-
-F1 = u(1);
-F2 = u(2);
-F3 = u(3);
-F4 = u(4);
-F5 = u(5);
+%%manipulated variables
+F2 = u(1);
+F3 = u(2);
+P100 = u(3);
+F200 = u(4);
+%disturbance variables
+F1 = u(5);
 X1 = u(6);
 T1 = u(7);
-T2 = u(8);
-T3 = u(9);
-F100 = u(10);
-T100 = u(11);
-P100 = u(12);
-Q100 = u(13);
-F200 = u(14);
-T200 = u(15);
-T201 = u(16);
-Q200 = u(17);
+T200 = u(8);
 
 % Variable identification
-
+%%Controlled variables
 L2 = x(1);
 X2 = x(2);
 P2 = x(3);
@@ -72,17 +64,22 @@ P2 = x(3);
 %Equations - evaporator
 T2 = 0.5616 * P2 + 0.3126 * X2 + 48.43;
 T3 = 0.507 * P2 + 55.0;
-F4 = (Q100 - F1 * Cp * (T2 - T1)) / lambda;
 
 %Equations - steam jacket
 T100 = 0.1538 * P100 + 90.0;
 Q100 = 0.16 * (F1 + F3) * (T100 - T2);
 F100 = Q100 / lambda_s;
 
+%Equations - evaporator
+F4 = (Q100 - F1 * Cp * (T2 - T1)) / lambda;
+
 %Equations - condenser
 Q200 = UA2 * (T3 - T200) /(1 + UA2 /(2 * Cp * F200));
 T201 = T200 + Q200 /(F200 * Cp);
 F5 = Q200 / lambda;
+
+Nstates= [84.6, 80.6, 8, 8, 119.9, 339, 9.3, 307.9, 46.1]
+States = [T2, T3, F4, F5, T100, Q100, F100, Q200, T201]
 
 %Diff system
 dxdt(1)= (F1-F4-F2)/rhoA; % mass balance of separator

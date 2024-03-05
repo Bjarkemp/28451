@@ -42,7 +42,15 @@ lambda = par(4);
 C = par(5);
 lambda_s = par(6);
 UA2 = par(7);
-
+T2 = par(8);
+T3 = par(9);
+F4 = par(10);
+F5 = par(11);
+T100 = par(12);
+Q100 = par(13);
+F100 = par(14);
+Q200 = par(15);
+T201 = par(16);
 
 %inputs
 %%manipulated variables
@@ -63,24 +71,17 @@ L2 = x(1);
 X2 = x(2);
 P2 = x(3);
 
+
+
 %Equations - evaporator
 T2 = 0.5616 * P2 + 0.3126 * X2 + 48.43;
 T3 = 0.507 * P2 + 55.0;
-
-%Equations - steam jacket
-T100 = 0.1538 * P100 + 90.0;
-Q100 = 0.16 * (F1 + F3) * (T100 - T2);
-F100 = Q100 / lambda_s;
-
-%Equations - evaporator
 F4 = (Q100 - F1 * Cp * (T2 - T1)) / lambda;
 
 %Equations - condenser
 Q200 = UA2 * (T3 - T200) /(1 + UA2 /(2 * Cp * F200));
 T201 = T200 + Q200 /(F200 * Cp);
 F5 = Q200 / lambda;
-
-States = [T2, T3, F4, F5, T100, Q100, F100, Q200, T201]
 
 %Diff system
 

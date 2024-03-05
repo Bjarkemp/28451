@@ -1,0 +1,12 @@
+close all
+clear all
+clc
+
+load lin.mat
+
+x1=1;
+x2=0
+u=0;
+
+A
+
