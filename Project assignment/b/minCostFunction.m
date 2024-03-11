@@ -9,4 +9,4 @@ F2=x(6);
 L2=x(2);
 
 %Cost function
-costFunction=(F200+P100)-F2;
+costFunction=F200+P100-F2;

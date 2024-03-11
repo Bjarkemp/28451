@@ -62,9 +62,24 @@ sim('Simulink_Project1.mdl')
 Time = ans.tout;
 
 % Access the output data
-x1 = ans.y(:,1);
-x2 = ans.y(:,2);
-x3 = ans.y(:,3);
+x1 = ans.y(:, 1);
+x2 = ans.y(:, 2);
+x3 = ans.y(:, 3);
+
+% Define noise parameters
+sigma_x1 = 0.005 * mean(x1); % Composition noise for x1 (0.5% of the mean)
+sigma_x2 = 0.005 * mean(x2); % Composition noise for x2 (0.5% of the mean)
+sigma_x3 = 2; % Pressure noise for x3 (2 kPa)
+
+% Generate noise
+noise_x1 = sigma_x1 * randn(size(x1)); % Composition noise for x1
+noise_x2 = sigma_x2 * randn(size(x2)); % Composition noise for x2
+noise_x3 = sigma_x3 * randn(size(x3)); % Pressure noise for x3
+
+% Add noise to signals
+x1_noisy = x1 + noise_x1;
+x2_noisy = x2 + noise_x2;
+x3_noisy = x3 + noise_x3;
 
 % Convert time from hours to days
 Time_days = Time / 24; % Assuming 24 hours in a day
@@ -74,24 +89,29 @@ figure;
 
 % Plot x1
 subplot(3,1,1);
-plot(Time_days, x1, 'b', 'LineWidth', 1.5);
+plot(Time_days, x1_noisy, 'b', 'LineWidth', 1.5);
 xlabel('Time (days)');
 ylabel('L2 [m]');
 title('Separator level Over Time');
+ylim([0,2.3])
 
 % Plot x2
 subplot(3,1,2);
-plot(Time_days, x2, 'r', 'LineWidth', 1.5);
+plot(Time_days, x2_noisy, 'r', 'LineWidth', 1.5);
 xlabel('Time (days)');
 ylabel('X2 [mol%]');
 title('Product composition Over Time');
+ylim([0,37])
 
 % Plot x3
 subplot(3,1,3);
-plot(Time_days, x3, 'g', 'LineWidth', 1.5);
+plot(Time_days, x3_noisy, 'g', 'LineWidth', 1.5);
 xlabel('Time (days)');
 ylabel('P2 [kPa]');
 title('Operating pressure Over Time');
+ylim([38,82])
+
 
 % Save figure
 saveas(gcf, 'Evaporator_1.png');
+
