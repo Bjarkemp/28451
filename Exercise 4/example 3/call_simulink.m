@@ -116,6 +116,6 @@ legend('Orientation','horizontal')
 legend('boxoff')
 title(['Step3b Nonlinear model description of predator-prey dynamics beyond equilbrium point (correct)'])
 
-for i=1:gcf
+for i=[1:gcf]
     saveas(i,num2str(i),'tif')
 end

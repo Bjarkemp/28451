@@ -22,5 +22,4 @@ UA2 = 6.84; % kW/K
 %Cost function
 % Bisphenol-A is 1.52 dollars a kg
 %F100 = 0.16 * (F1 + F3) * (0.1538 * P100 + 90.0 - 0.5616 * P2 + 0.3126 * X2 + 48.43) / lambda_s;
-costFunction=(F200+P100)-(F2);
-%costFunction=0.16 * (F1 + F3) * (0.1538 * P100 + 90.0 - 0.5616 * P2 + 0.3126 * X2 + 48.43) / lambda_s;
+costFunction=(F200+0.16 * (F1 + F3) * (0.1538 * P100 + 90.0 - 0.5616 * P2 + 0.3126 * X2 + 48.43) / lambda_s)-(F2+P2);

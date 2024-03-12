@@ -43,6 +43,7 @@ T100 = 0.1538 * P100 + 90.0;
 Q100 = 0.16 * (F1 + F3) * (T100 - T2);
 F100 = Q100 / lambda_s;
 
+
 %Equations - evaporator
 F4 = (Q100 - F1 * Cp * (T2 - T1)) / lambda;
 

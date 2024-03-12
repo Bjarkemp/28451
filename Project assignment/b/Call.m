@@ -38,13 +38,19 @@ C = 4; % kg/kPa
 lambda_s = 36.6; % kW (kg/min)
 UA2 = 6.84; % kW/K
 
+%disturbance variables
+F1 = 10.0; %kg/min %%Feed flowrate
+X1 = 5.0; % percent %%Feed composition
+T1 = 40.0; %C %%Feed temperature
+T200 = 25.0; %C %%Cooling water inlet temp.
+
 par = [rhoA,M,Cp,lambda,C,lambda_s, UA2];
 
 %%States
 %T2 = 84.6; %C %%Product temperature
 %T3 = 80.6; %C %%Circulating temperature
-%F4 = 8.0; %kg=min %%Vapor flowrate
-%F5 = 8.0; %kg=min %%Condensate flowrate
+%F4 = 8.0; %kg/min %%Vapor flowrate
+%F5 = 8.0; %kg/min %%Condensate flowrate
 %T100 = 119.9; %C %%Steam temperature
 %Q100 = 339.0; %kW %%Heater duty
 %F100 = 9.3; %kg/min %%Steam flowrate
@@ -52,17 +58,10 @@ par = [rhoA,M,Cp,lambda,C,lambda_s, UA2];
 %T201 = 46.1; %C %%Cooling water outlet temp.
 
 
-
-%disturbance variables
-F1 = 10.0; %kg/min %%Feed flowrate
-X1 = 5.0; % percent %%Feed composition
-T1 = 40.0; %C %%Feed temperature
-T200 = 25.0; %C %%Cooling water inlet temp.
-
 %manipulated variables
 inputv =[F2, F3, P100, F200].';-0.1+0.1*rand(1)
 
-%Define initial conditions for controlled variables
+%Define initial conditions for controlled vari ables
 L2int = L2 ; % m %%separator level
 X2int = X2; % percent %% product composition
 P2int = P2; % kPa % operating pressure
